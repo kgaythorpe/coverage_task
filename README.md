@@ -1,6 +1,6 @@
 # Data clenaing task
 
-This repository contains two data files in differing formats. These data are fictionalised vaccination coverage estimates for green fever, blue fever and pink fever.
+This repository contains two data files (data_20240120.xlsx and pink_fever_monthly.xlsx) in differing formats. These data are fictionalised vaccination coverage estimates for green fever, blue fever and pink fever.
 
 ## Task
 
