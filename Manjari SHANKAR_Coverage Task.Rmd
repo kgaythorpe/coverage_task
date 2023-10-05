@@ -40,15 +40,13 @@ pink_fever_raw <- read_xlsx("pink_fever_monthly.xlsx")
 ## Review & Data cleaning
 
 ```{r include=FALSE}
-skimr::skim(pink_fever_raw)
+skimr::skim(pink_fever_raw) # checking variable summaries and types
 skimr::skim(green_blue_fever_raw)
-
-class(green_blue_fever_raw$`BF coverage`)
 
 green_blue_fever <- green_blue_fever_raw %>% 
   janitor:: clean_names() %>% # dataset had names with spaces
   mutate(bluefever_coverage = bf_coverage * 100, 
-         date = as.Date(date)) %>%
+         date = as.Date(date)) %>% # date originally a character variable
   rename(greenfever_coverage = gf_coverage) %>%
   select(date, bluefever_coverage, greenfever_coverage)
 
@@ -75,13 +73,14 @@ combined_coverage2 <- combined_coverage %>%
 ```
 
 ## Summary by Vaccine
+
 ```{r echo=FALSE}
 combined_overview <- combined_coverage2 %>%
   group_by(vaccine) %>%
   summarise(Vax_Introduced = first(date), Vax_Last = last(date), pct_change = percent((last(vaccination_coverage)- first(vaccination_coverage))/first(vaccination_coverage)))
 
 qflextable(combined_overview) %>% 
-  theme_booktabs()
+  theme_booktabs() # shows first and last date of administration and % change since introduction
 ```
 
 ## Plotting the data
